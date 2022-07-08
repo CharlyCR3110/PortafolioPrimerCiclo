@@ -1,5 +1,8 @@
-//Carlos González Garita y Kristel Salazar Chinchilla || Universidad Nacional || Ingeniería en Sistemas
-//17/04/2022
+/* supermercado.cpp
+* version final
+* 4/06/2022
+*Carlos González Garita y Kristel Salazar Chinchilla || Universidad Nacional || Ingeniería en Sistemas
+*/
 #include <iostream>
 #include <sstream>
 using namespace std;
@@ -264,25 +267,23 @@ public:
  */
     float kilogramosVendidosDeUnProducto(string codigo) { //cuantosKgsSeHanVendidoDelProducto
         float suma = 0;
-        // bool esVacio = true; //se me olvido borrar
+        bool esVacio = true;
         for (int i = 0; i < cantidad; i++) {
             if (productos[i].getCodigo() == codigo) {
                 suma += productos[i].getPeso() * productos[i].getCantidadVendida();
-                // esVacio = false; //se me olvido borrar
+                esVacio = false;
             }
         }
-        //se me olvido borrar
-        // if (esVacio) {
-        //     suma = 0.4124541245;
-        // }
-        // return suma;
+        if (esVacio) {
+            suma = 0.4124541245;
+        }
+        return suma;
     }
     //11
     string productosMasCostososQue(string codigo) { //imprimProductosQueSonMasCostososQue
         stringstream ss;
         int posicion;
         bool esVacio = true;
-        //Busca la posicion del producto cuyo codigo es igual al argumento
         for (int i = 0; i < cantidad; i ++ ) {
             if (productos[i].getCodigo() == codigo) {
                 posicion = i;
@@ -343,7 +344,7 @@ public:
     int gananciaDelSupermecadoPorVentas() {
         int ganancia  = 0;
         for (int i = 0; i < cantidad; i++){
-            ganancia += (productos[i].getPrecioDeVenta() * productos[i].getCantidadVendida()) - (productos[i].getPrecioBase() * productos[i].getCantidadVendida());
+            ganancia += productos[i].getPrecioDeVenta() * productos[i].getCantidadVendida() - productos[i].getPrecioBase() * productos[i].getCantidadVendida();
         }
         return ganancia;
     }
@@ -388,6 +389,7 @@ public:
 
         return ss.str();
     }
+	//width
     //17
     string graficoDeVentaDeLos5MasVendidos() {
         stringstream ss;
@@ -454,6 +456,7 @@ public:
 // Devuelve un string que contiene el menu
 string menu () {
     stringstream menu;
+	menu << endl;
     menu << "- 1- Ingresar producto(s)." << endl;
     menu << "- 2- Eliminar producto" << endl;
     menu << "- 3- Desplegar el producto de mayor precio." << endl;
@@ -461,7 +464,7 @@ string menu () {
     menu << "- 5- Ordenar los productos por codigo" << endl;
     menu << "- 6- Desplegar todos los productos." << endl;
     menu << "- 7- Desplegar la cantidad de productos bajos de existencia." << endl;
-    menu << "- 8- Desplegar los productos bajos de existencia." << endl;
+    menu << "- 8- Mostrar los productos bajos de existencia." << endl;
     menu << "- 9- Desplegar el total de kilogramos de todos los productos vendidos." << endl;
     menu << "-10- Desplegar el total de Kilogramos vendidos de un producto." << endl;
     menu << "-11- Desplegar la lista de productos que son mas costosos que un producto dado" << endl;
@@ -545,7 +548,7 @@ void eligeOpcion(Supermercado &supermercado, int opcion, bool &repetir, int &i) 
                     supermercado.eliminarProductoPorCodigo(codigo);
                     cout << "Se elimino el producto con codigo " << codigo << endl;
                 } else {
-                    cout << "El producto no existe" << endl;
+                    cout << "El producto no existe" << endl << endl;
                 }
                 }
                 break;
@@ -555,7 +558,7 @@ void eligeOpcion(Supermercado &supermercado, int opcion, bool &repetir, int &i) 
                 }
                 break;
             case 4: {                
-                cout << "El producto con mayor existencia es: " << endl;
+                cout << "El producto con mayor existencia es: " << endl << endl;
                 cout << supermercado.productoConMayorExistencia().mostrarDatosDelProducto() << endl;
                 }
                 break;
@@ -588,7 +591,7 @@ void eligeOpcion(Supermercado &supermercado, int opcion, bool &repetir, int &i) 
                     cout << "El total de kilogramos vendidos del producto " << codigo << " es: ";
                     cout << supermercado.kilogramosVendidosDeUnProducto(codigo) << endl;
                 } else {
-                    cout << "El producto no existe" << endl;
+                    cout << "El producto no existe" << endl << endl;
                 }
                 }
                 break;
@@ -611,7 +614,7 @@ void eligeOpcion(Supermercado &supermercado, int opcion, bool &repetir, int &i) 
                     cout << "La cantidad de unidades vendidas del producto codigo " << codigo << " son: ";
                     cout << supermercado.cantidadDeUnidadesVendidasDeUnProducto(codigo) << endl;
                 } else {
-                    cout << "El producto no existe" << endl;
+                    cout << "El producto no existe" << endl << endl;
                 }
                 }
                 break;

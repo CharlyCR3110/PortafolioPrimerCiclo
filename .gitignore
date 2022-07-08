@@ -1,1 +1,12 @@
-.vscode
+*.vscode
+*.exe
+tempCodeRunnerFile.cpp
+*.pdf
+*.docx
+*.doc
+*.rar
+*.eddx
+*.jpg
+*.png
+**/A ENVIAR
+**/documentacion
